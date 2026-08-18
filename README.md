@@ -48,41 +48,80 @@ dsh-personal-directive/
 └── README.md
 ```
 
+## 环境要求
+
+- 已安装 DeepSeek Harness，且 `dsh web` 可以正常启动。
+- `dsh plugin` 命令可用。
+- `pnpm` 已加入 PATH。
+- 当前安装教程面向 `web` profile。
+
 ## 安装
 
-以下示例针对 Windows 和 DeepSeek Harness Web profile。
+### 从 GitHub 安装
 
-### 1. 安装插件依赖
-
-在本项目目录执行：
+推荐直接从 GitHub 安装：
 
 ```powershell
-cd "C:/Users/Administrator/Desktop/DSH个人插件/dsh-personal-directive"
-pnpm install
+dsh plugin --profile web add github:liucaimao2026/dsh-personal-directive
 ```
 
-### 2. 加入 Web profile
+如果 `dsh` 没有加入 PATH，可以使用 DSH 安装目录中的命令：
 
 ```powershell
-dsh plugin --profile web add "link:C:/Users/Administrator/Desktop/DSH个人插件/dsh-personal-directive"
+& "D:/deepseek-harness/node_modules/.bin/dsh.cmd" plugin --profile web add github:liucaimao2026/dsh-personal-directive
 ```
 
-如果 profile 中已经存在本项目，只需执行：
+安装成功后，DSH 会自动：
 
-```powershell
-cd "$env:USERPROFILE/.dsh/profiles/web"
-pnpm install
-```
+1. 将插件加入 `~/.dsh/profiles/web/package.json` 的 dependencies。
+2. 将 `dsh-personal-directive` 加入 `dsh.profile.bundles`。
+3. 应用插件自带的 `cordis.patch.yml`。
+4. 安装插件的服务端和 Web 客户端依赖。
 
-### 3. 重启 Harness Web
-
-完全重启 DeepSeek Harness Web，再刷新：
+然后完全重启 `dsh web`，再刷新页面：
 
 ```text
 http://127.0.0.1:3080
 ```
 
-新 bundle 需要在 Harness 启动时加载。浏览器单纯刷新不能替代首次启动时的 bundle 组装。
+### 本地 link 安装
+
+适合开发、修改源码或从本地备份恢复：
+
+```powershell
+dsh plugin --profile web add link:"C:/Users/Administrator/Desktop/DSH个人插件/dsh-personal-directive"
+```
+
+本地 link 指向个人目录。修改源码后不需要重新安装依赖，但需要重启 `dsh web` 才能加载新的 Host 或 Web 客户端代码。
+
+### 从本地 link 切换到 GitHub 版本
+
+如果 profile 中已经存在同名本地 link，先移除旧依赖：
+
+```powershell
+dsh plugin --profile web remove dsh-personal-directive
+dsh plugin --profile web add github:liucaimao2026/dsh-personal-directive
+```
+
+### 更新
+
+从 GitHub 安装后更新到最新版本：
+
+```powershell
+dsh plugin --profile web update dsh-personal-directive
+```
+
+更新后完全重启 `dsh web`。
+
+### 卸载
+
+卸载只会移除插件，不会删除用户其他 bundle：
+
+```powershell
+dsh plugin --profile web remove dsh-personal-directive
+```
+
+本项目顶部的「破甲：开启 / 破甲：关闭」是运行时开关，不等同于上述卸载命令。
 
 ## 使用开关
 
