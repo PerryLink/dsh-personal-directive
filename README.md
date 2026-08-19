@@ -4,6 +4,12 @@ DeepSeek Harness 的「无限一代」二次开发版：保留原版仓库的系
 
 > 本项目是基于原项目的个人二次开发版本，不是原作者的官方发布版本。
 
+
+打个推广 基元律动 白嫖68元 deepseek模型还是老价格
+邀请好友限时活动继续延长，体验OpenSquilla新功能畅享免费token
+https://tokenrhythm.studio/i/rf_tr_4Xud9j0AXkmBFCOp6MMMzsXQ
+不是土台子 
+
 ## 项目来源
 
 原版项目：
