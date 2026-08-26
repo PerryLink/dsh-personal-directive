@@ -4,12 +4,6 @@ DeepSeek Harness 的「无限一代」二次开发版：保留原版仓库的系
 
 > 本项目是基于原项目的个人二次开发版本，不是原作者的官方发布版本。
 
-
-打个推广 基元律动 白嫖68元 deepseek模型还是老价格
-邀请好友限时活动继续延长，体验OpenSquilla新功能畅享免费token
-https://tokenrhythm.studio/i/rf_tr_4Xud9j0AXkmBFCOp6MMMzsXQ
-不是土台子 
-
 ## 项目来源
 
 原版项目：
@@ -90,15 +84,24 @@ dsh plugin --profile web add github:liucaimao2026/dsh-personal-directive
 http://127.0.0.1:3080
 ```
 
-### 本地 link 安装
+### 本地安装备选（git / pack）
 
-适合开发、修改源码或从本地备份恢复：
+适合开发、修改源码或从本地备份恢复。git 安装会一并安装依赖：
 
 ```powershell
-dsh plugin --profile web add link:"C:/Users/Administrator/Desktop/DSH个人插件/dsh-personal-directive"
+dsh plugin --profile <p> add github:liucaimao2026/dsh-personal-directive
 ```
 
-本地 link 指向个人目录。修改源码后不需要重新安装依赖，但需要重启 `dsh web` 才能加载新的 Host 或 Web 客户端代码。
+将 `<p>` 替换为目标 profile 名（如 `web`）。
+
+也可以先打包再从本地 tarball 安装：
+
+```powershell
+npm pack
+dsh plugin --profile <p> add ./dsh-personal-directive-0.2.0.tgz
+```
+
+打包安装同样会安装依赖。修改源码后需重新打包并重装，并重启 `dsh web` 才能加载新的 Host 或 Web 客户端代码。
 
 ### 从本地 link 切换到 GitHub 版本
 
