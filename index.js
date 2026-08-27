@@ -80,16 +80,16 @@ export const inject = ["tools", "systemPrompt", "typert"];
 export function apply(ctx) {
   const gateway = new PersonalDirectiveGateway(ctx);
   const profileTool = {
-    name: "infinite_gen1_profile",
+    name: "personal_directive_profile",
     description:
-      "Return the bundled 无限一代 (Infinite Generation One) 破甲 system prompt.",
+      "Return the bundled personal directive system prompt with its enable state.",
     parameters: { type: "object", properties: {}, additionalProperties: false },
     output: objectOutput,
     execute() {
       return {
-        name: "infinite-gen-1",
-        displayName: "无限一代",
-        version: "0.1.0",
+        name: "personal-directive",
+        displayName: "Personal Directive",
+        version: "0.2.0",
         enabled: gateway.enabled,
         prompt: gateway.enabled ? PROMPT_TEXT : "",
       };
@@ -97,7 +97,7 @@ export function apply(ctx) {
   };
 
   ctx.effect(() => ctx.systemPrompt.section({
-    name: "infinite-gen-1:global-system-prompt",
+    name: "personal-directive:system-prompt",
     order: 100,
     text: () => gateway.enabled ? PROMPT_TEXT : "",
   }), "personal-directive: prompt section");
