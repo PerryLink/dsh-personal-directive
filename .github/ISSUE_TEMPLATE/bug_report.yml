@@ -1,0 +1,52 @@
+name: Bug report
+description: Report a bug in dsh-personal-directive
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: The plugin version (check `npm ls dsh-personal-directive` or the profile package.json).
+      placeholder: "0.2.0"
+    validations:
+      required: true
+  - type: input
+    id: harness
+    attributes:
+      label: Harness version
+      description: The DSH runtime line (`dsh --version`).
+      placeholder: "0.1.1-rc.2"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS / Node version
+      placeholder: "Windows 11, Node 22.19"
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Install … 2. Toggle … 3. Observe …"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional)
+      description: "**Paste only after redacting tokens, API keys, request headers, and personal data.**"

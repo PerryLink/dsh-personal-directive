@@ -12,7 +12,7 @@ DeepSeek Harness 的「无限一代」二次开发**框架版**：保留原版�
 - 项目名称：dsh-infinite-gen-1 / 无限一代（Infinite Generation One）
 - 原作者：Minglink
 
-本框架版保留原版的插件结构（提示词段注入、`personal_directive_profile` 工具、Web 顶部开关），在此基础上增加 Web 顶部可视化控制，并将提示词内容替换为中性占位指令（见「归属和许可证说明」）。
+本框架版保留原版的插件结构（提示词段注入、`personal_directive_profile` 工具、Web 顶部开关），在此基础上增加 Web 顶部可视化控制，并将提示词内容替换为中性占位指令（见「归属和许可证说明」）。本仓库是 [liucaimao2026/dsh-personal-directive](https://github.com/liucaimao2026/dsh-personal-directive) 的维护性 fork，上游归属完整保留。
 
 ## 二次开发内容
 
@@ -223,4 +223,4 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 ## 致谢
 
-感谢原项目作者 Minglink 提供 `dsh-infinite-gen-1` 的原始实现和提示词方案。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
+感谢原项目作者 Minglink 提供 `dsh-infinite-gen-1` 的原始实现和提示词方案，感谢 liucaimao2026 的框架实现。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
