@@ -2,6 +2,14 @@
   "name": "dsh-personal-directive",
   "version": "0.2.0",
   "description": "Repository prompt plugin with a live top-bar enable/disable switch (framework edition: ships a neutral placeholder directive).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PerryLink/dsh-personal-directive.git"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/PerryLink"
+  },
   "license": "MIT",
   "type": "module",
   "main": "index.js",
