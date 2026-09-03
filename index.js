@@ -89,7 +89,7 @@ export function apply(ctx) {
       return {
         name: "personal-directive",
         displayName: "Personal Directive",
-        version: "0.2.0",
+        version: "0.2.1",
         enabled: gateway.enabled,
         prompt: gateway.enabled ? PROMPT_TEXT : "",
       };

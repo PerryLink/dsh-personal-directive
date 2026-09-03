@@ -1,6 +1,6 @@
 {
   "name": "dsh-personal-directive",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Repository prompt plugin with a live top-bar enable/disable switch (framework edition: ships a neutral placeholder directive).",
   "repository": {
     "type": "git",
