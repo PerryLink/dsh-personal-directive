@@ -30,7 +30,6 @@
     "client": {
       "platform": "web",
       "inject": [
-        "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-locale",
         "@deepseek-ai/dsh-api-gateway",
         "@deepseek-ai/dsh-client-ui-conversation",
@@ -54,17 +53,16 @@
     "check": "node --check index.js && node --check lib/client.js && node --check test/index.test.mjs"
   },
   "dependencies": {
-    "@deepseek-ai/dsh-typert-protocol": "0.1.0-rc.7",
+    "@deepseek-ai/dsh-typert-protocol": "0.1.2-alpha.5",
     "react": "^18.2.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "4.0.1"
+    "@deepseek-ai/cordis": "^4.0.2"
   },
   "peerDependencies": {
     "@deepseek-ai/dsh-api-gateway": ">=0.1.1-rc.2 <0.2.0",
     "@deepseek-ai/dsh-client-locale": ">=0.1.1-rc.2 <0.2.0",
-    "@deepseek-ai/dsh-client-runtime": ">=0.1.1-rc.2 <0.2.0",
     "@deepseek-ai/dsh-client-ui-conversation": ">=0.1.1-rc.2 <0.2.0",
     "@deepseek-ai/dsh-client-ui-primitives": ">=0.1.1-rc.2 <0.2.0"
   },
@@ -73,9 +71,6 @@
       "optional": true
     },
     "@deepseek-ai/dsh-client-locale": {
-      "optional": true
-    },
-    "@deepseek-ai/dsh-client-runtime": {
       "optional": true
     },
     "@deepseek-ai/dsh-client-ui-conversation": {
