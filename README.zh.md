@@ -1,4 +1,5 @@
 # dsh-personal-directive
+- **1024 商店渠道**：先 `npm i -g dsh1024`，再 `dsh1024 plugin --profile web add dsh-personal-directive`（计入 [deepseek1024.com](https://deepseek1024.com) 安装排行）。
 
 DeepSeek Harness 的「无限一代」二次开发**框架版**：保留原版仓库的插件形态（系统提示词注入 + 工具 + 顶部运行时开关），但**不随包发布原版提示词内容**——改用中性占位指令，用户可自行替换为自己的个人指令。
 
