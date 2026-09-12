@@ -2,6 +2,12 @@
 
 All notable changes to `dsh-personal-directive` are documented here.
 
+## [0.2.3] - 2026-09-12
+
+### Fixed
+
+- Derive the status snapshot `version` from `package.json` instead of the stale literal `"0.2.1"` (the package had already moved to 0.2.2), and point the monthly Compat workflow at the `0.1.5-rc.2` host line instead of `0.1.1-rc.2` — the old pin was *below* this package's own peer floor, so the gate could not validate any supported host.
+
 ## [0.2.2] - 2026-09-10
 
 ### Changed
