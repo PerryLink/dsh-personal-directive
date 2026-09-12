@@ -3,6 +3,12 @@ import { TypertRemoteService } from "@deepseek-ai/dsh-typert-protocol";
 import { z } from "zod";
 
 const PACKAGE_NAME = "dsh-personal-directive";
+// Derived from package.json so the status snapshot can never drift from the
+// published version again (it was pinned to the literal "0.2.1" while the
+// package had already moved to 0.2.2).
+const { version: PACKAGE_VERSION } = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url), "utf8"),
+);
 const PROMPT_TEXT = readFileSync(
   new URL("./prompts/personal-directive.md", import.meta.url),
   "utf8",
@@ -89,7 +95,7 @@ export function apply(ctx) {
       return {
         name: "personal-directive",
         displayName: "Personal Directive",
-        version: "0.2.1",
+        version: PACKAGE_VERSION,
         enabled: gateway.enabled,
         prompt: gateway.enabled ? PROMPT_TEXT : "",
       };
