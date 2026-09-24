@@ -21,6 +21,9 @@ importers:
       '@deepseek-ai/cordis':
         specifier: ^4.0.4
         version: 4.0.4
+      '@deepseek-ai/dsh-typert-registry':
+        specifier: 0.1.7-rc.1
+        version: 0.1.7-rc.1(@deepseek-ai/cordis@4.0.4)
 
 packages:
 
@@ -46,6 +49,11 @@ packages:
 
   '@deepseek-ai/dsh-typert-protocol@0.1.7-rc.1':
     resolution: {integrity: sha512-DOJiFdvHl1RoJHO7C6XymZUqVZwZiF7JL1PS+AEtQWg6nsYXvlkF1VLbwzPxMW470RzzimGLCz7boOxx086dLA==}
+    peerDependencies:
+      '@deepseek-ai/cordis': ~4.0.4
+
+  '@deepseek-ai/dsh-typert-registry@0.1.7-rc.1':
+    resolution: {integrity: sha512-G3E4zeJvadYdDqnCeO26+ndPO8LdnijJAx91yhmha1Q6LWYRVORKCTtF4nH7ACm05KxaXixvtOR4/3hEvW023A==}
     peerDependencies:
       '@deepseek-ai/cordis': ~4.0.4
 
@@ -83,6 +91,11 @@ snapshots:
     dependencies:
       '@deepseek-ai/cordis': 4.0.4
       '@deepseek-ai/dsh-brand': 0.1.7-rc.1(@deepseek-ai/cordis@4.0.4)
+
+  '@deepseek-ai/dsh-typert-registry@0.1.7-rc.1(@deepseek-ai/cordis@4.0.4)':
+    dependencies:
+      '@deepseek-ai/cordis': 4.0.4
+      zod: 4.4.3
 
   '@standard-schema/spec@1.1.0': {}
 

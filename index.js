@@ -23,8 +23,17 @@ const stateSchema = z.object({ enabled: z.boolean() });
 const setEnabledRequestSchema = z.object({ enabled: z.boolean() });
 const setEnabledResultSchema = z.object({ enabled: z.boolean() });
 
+/**
+ * Strict wire codec: the single `create()` factory face.
+ *
+ * `TypertCodec`'s strict form materializes the process-realm schema on first
+ * boundary use. The 0.1.5-line `schema` field is gone — a codec without
+ * `create` is refused at mount by `validateCodec` ("strict codec has no
+ * create() factory") and by the Typert Loader's `requireStrictCodec`, so the
+ * field is deliberately absent rather than merely unused.
+ */
 function codec(typeSymbol, schema) {
-  return { mode: "strict", typeSymbol, schema };
+  return { mode: "strict", typeSymbol, create: () => schema };
 }
 
 function jsonParameter(name, typeSymbol, schema) {
@@ -110,3 +119,13 @@ export function apply(ctx) {
   ctx.effect(() => ctx.tools.register(profileTool), "personal-directive: profile tool");
   ctx.effect(() => ctx.typert.register(MANIFEST), "personal-directive: remote manifest");
 }
+
+/**
+ * The Typert host contribution, exported under the name the Typert Loader reads.
+ *
+ * The loader narrows a plugin's typert manifest from this exact static export
+ * (`validateTypertManifest`, `TYPERT_HOST_EXPORT`), so the object handed to
+ * `ctx.typert.register()` is the same object the loader would validate — one
+ * artifact, not two that can drift.
+ */
+export const TYPERT = MANIFEST;
