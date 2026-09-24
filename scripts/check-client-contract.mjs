@@ -144,6 +144,24 @@ function main() {
     return
   }
 
+  // R4: the checkout is a LOCAL DEVELOPMENT ARTIFACT — CI runners and tarball installs
+  // have none. Per dsh-draw's established rule, the gate degrades EXPLICITLY here (it says
+  // what it could not check and why) rather than either failing the build or skipping quietly.
+  // An explicit `--host`/`DSH_HOST_ROOT` that does not resolve, or any other contract
+  // violation, still fails loudly below.
+  const explicitHost = host !== undefined && host !== ''
+  try {
+    resolveHostRoot(host)
+  } catch (error) {
+    if (explicitHost || !(error instanceof HostSurfaceError)) throw error
+    console.log(`[client-contract] DEGRADED (${CLIENT_ENTRY})`)
+    console.log('  no DeepSeek Harness checkout is present, so the host symbol surface cannot be read.')
+    console.log('  This is expected in CI and in tarball installs (the checkout is a local development artifact).')
+    console.log('  Nothing was verified or falsified here: `node --check` and the test suite still run.')
+    console.log('  To run the full contract check locally, pass --host <checkout> or set DSH_HOST_ROOT.')
+    return
+  }
+
   try {
     const result = checkClientContract({ host })
     console.log(`[client-contract] OK (${CLIENT_ENTRY})`)

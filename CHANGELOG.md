@@ -2,6 +2,12 @@
 
 All notable changes to `dsh-personal-directive` are documented here.
 
+## [0.2.6] - 2026-09-24
+
+### Fixed
+
+- The `client-contract` gate no longer fails a build that has no DeepSeek Harness checkout. It resolves the host through `--host`, then `DSH_HOST_ROOT`, then a sibling/ancestor/known-checkout search — and until now the search's "not found" outcome was an uncaught `HostSurfaceError`, so every CI run failed with six failures in the test suite even though the shipped bundle was fine. The checkout is a local development artifact (CI runners and tarball installs have none), so the gate now **degrades explicitly**: it prints what it could not check and why, and exits 0 without claiming anything was verified. An explicit `--host`/`DSH_HOST_ROOT` that does not resolve, and every genuine contract violation, still fail loudly. This follows the rule `dsh-draw`'s `verify:host-contract` already states for the same situation.
+
 ## [0.2.5] - 2026-09-24
 
 ### Fixed
