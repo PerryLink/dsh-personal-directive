@@ -2,6 +2,27 @@
 
 All notable changes to `dsh-personal-directive` are documented here.
 
+## [0.2.5] - 2026-09-24
+
+### Fixed
+
+- **The plugin row could not activate at all on a `0.1.7-rc.1` host.** `index.js` declared its two invocation codecs as `{ mode: "strict", typeSymbol, schema }` — the 0.1.5-line two-faced form. The 0.1.7 `@deepseek-ai/dsh-typert-registry` requires the single `create()` factory face (`packages/typert/protocol/src/types.ts`: `readonly create: () => TypertSchema`; there is no `schema` member), so `validateCodec` refused the manifest at mount and the whole entry failed:
+
+  ```text
+  dsh: warning: 1 entry did not activate
+  personal-directive (dsh-personal-directive): Error: typert: dsh-personal-directive#personalDirective/getState result strict codec has no create() factory
+  ```
+
+  The codec helper is now `{ mode: "strict", typeSymbol, create: () => schema }`, isomorphic with the rest of the plugin family (`dsh-ticktick/src/wire.ts`, `dsh-budget`, `dsh-draw`, `dsh-observe`, `dsh-reach`, `dsh-talk`, `dsh-autotier`). The obsolete `schema` field is **removed** rather than kept alongside: it is not a member of the host contract, nothing in the host reads it, and carrying it would have hidden the defect instead of fixing it. This repository was the only one of the nine strict-codec plugins still on the old form — measured by the maintainer across all 45 plugin repositories.
+- `lib/client.js` carried the same defect one line below its own version of the helper (`{ mode: "strict", typeSymbol, schema: { parse: identity } }`). It is reached through `ctx.remote.$mount()`, which lands in the same `DescriptorStore.validate()` as the host face (`packages/api/gateway/src/client/index.ts` → `RemoteStore.register` → `descriptors.validate`), so it would have failed the same way the moment the switch mounted. Fixed identically: `create: () => ({ parse: identity })`. The returned parser stays shape-defensive on purpose — the authoritative strict validation of a result is the host's zod schema, which the Remote call runs before it replies.
+- The `TYPERT` manifest is now also **exported** under the name the Typert Loader itself reads (`validateTypertManifest`, `TYPERT_HOST_EXPORT`), so the object handed to `ctx.typert.register()` is one artifact rather than a second copy that can drift from what the loader would validate.
+
+### Added
+
+- **A Typert codec gate, `scripts/check-typert-codec.mjs` on the `harness:check` / `check` path, plus `test/typert-mount.test.mjs` and `test/typert-codec-gate.test.mjs`.** The defect above was invisible to every gate this repository had: `node --check` only proves `index.js` parses, and the host-face spec hands `apply()` a stub Context that accepts any object. The gate is the local mirror of the host rule (`validateCodec` + the loader's `requireStrictCodec`): it constructs both faces' real artifacts — `index.js`'s exported `TYPERT` manifest, and the contribution `lib/client.js` hands to `ctx.remote.$mount` — walks every descriptor, and asserts each codec carries a `create()` **function** and no `schema` member, naming the offending invocation id on failure. `test/typert-mount.test.mjs` is the stronger half: it mounts a real `@deepseek-ai/dsh-typert-registry` (new exact `devDependency`, `0.1.7-rc.1`) on a real Cordis `Context`, registers both faces and asserts the registration does not throw, then rebuilds the rejected 0.1.5-line codec in memory (via a `module.registerHooks()` load hook, so no obsolete literal has to live in the tree) and asserts the registry refuses it — the only form that provably goes red on this defect. The detector matches `schema` as an object property, both `schema:` and the `{ …, schema }` shorthand the old literal actually used. Zero new runtime dependencies.
+- `scripts/probe-typert-codec-contract.mjs` (new npm script `probe:typert-codec`) answers the other half of the question against the *installed* host rather than this repository's reading of it: it registers a `{ mode, typeSymbol, schema }` codec and a `create()` codec on both faces with the real registry and asserts the first is refused and the second accepted. Run it after a host-line bump to re-measure the assumption the gate encodes.
+- The gate is driven by the real host profile as well: reproduced and then cleared with a throwaway `DSH_HOME` profile on `@deepseek-ai/dsh-base@0.1.7-rc.1` + `dsh-headless@0.1.7-rc.1`, which is the only check that could see the original failure. Both faces were measured: `ctx.typert.register()` for the host face and `ctx.typert.remotes.register()` for the client contribution, which is the path `ctx.remote.$mount()` takes.
+
 ## [0.2.4] - 2026-09-24
 
 ### Fixed

@@ -45,7 +45,10 @@ dsh-personal-directive/
 ├── lib/
 │   └── client.js                    # 顶部可视化开关
 ├── scripts/
-│   └── check-client-contract.mjs    # 宿主契约检查（符号存在性门禁）
+│   ├── check-client-contract.mjs    # 宿主契约检查（符号存在性门禁）
+│   ├── check-typert-codec.mjs       # Typert codec 门禁（create() 单面）
+│   ├── probe-typert-codec-contract.mjs  # 对已装宿主实测 codec 契约
+│   └── lib/                         # 门禁共用的解析/取源/改写 helper
 ├── prompts/
 │   └── personal-directive.md        # 中性占位指令（可替换为自己的内容）
 ├── cordis.patch.yml                 # Bundle 插入声明
@@ -202,6 +205,18 @@ $env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
 ```
 
 若它报告找不到宿主 checkout，把 `DSH_HOST_ROOT` 指向你的 DeepSeek Harness 目录即可。
+
+`harness:check` 还会运行 **Typert codec 门禁**（`scripts/check-typert-codec.mjs`）。Typert 调用 codec 的形态是 `{ mode: 'strict', typeSymbol, create }`；0.1.5 线写的是 `{ mode, typeSymbol, schema }`，而 0.1.7 宿主在挂载时直接拒收旧形态——`validateCodec` 抛 `typert: <id> result strict codec has no create() factory`，插件行不激活，而本仓其他任何检查都看不见它：旧字面量是完全合法的对象，`node --check` 过、stub Context 也照收。这个门禁就是那条宿主规则的本地镜像：它构造两面各自的真实产物——`index.js` 导出的 `TYPERT` manifest，以及 `lib/client.js` 交给 `ctx.remote.$mount` 的 contribution——遍历每个 descriptor，断言每个 codec 都带 `create()` **函数**且不含 `schema` 成员，并点名出错的 invocation id。`test/typert-mount.test.mjs` 更进一步：把两面注册进真实 `@deepseek-ai/dsh-typert-registry` + 真实 Cordis `Context`，再在内存里重建被拒的 0.1.5 线 codec，断言该注册器确实拒收——以此证明门禁**能红**。
+
+```powershell
+node scripts/check-typert-codec.mjs
+```
+
+`scripts/probe-typert-codec-contract.mjs` 回答另一半问题，而且是对**已安装的宿主**实测、而不是对本仓理解的复述：它把 `{ mode, typeSymbol, schema }` 与 `create()` 两种 codec 分别注册到两面的真实注册器上，断言前者被拒、后者被接受。宿主线升级后跑一次，即可重新测量门禁所依赖的前提。
+
+```powershell
+pnpm run probe:typert-codec
+```
 
 检查 Web profile 的 bundle 组合：
 
