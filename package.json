@@ -1,6 +1,6 @@
 {
   "name": "dsh-personal-directive",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Repository prompt plugin with a live top-bar enable/disable switch (framework edition: ships a neutral placeholder directive).",
   "repository": {
     "type": "git",
@@ -57,13 +57,13 @@
     "check": "node --check index.js && node --check lib/client.js && node --check test/index.test.mjs && node --check test/client-contract.test.mjs && node --check test/typert-mount.test.mjs && node --check test/typert-codec-gate.test.mjs && node --check scripts/check-client-contract.mjs && node --check scripts/check-typert-codec.mjs && node --check scripts/probe-typert-codec-contract.mjs && node --check scripts/lib/host-surface.mjs && node --check scripts/lib/module-source.mjs && node --check scripts/lib/module-rewrite.mjs && node --check scripts/lib/typert-codec.mjs && node --check scripts/lib/legacy-codec.mjs && node scripts/check-client-contract.mjs && node scripts/check-typert-codec.mjs"
   },
   "dependencies": {
-    "@deepseek-ai/dsh-typert-protocol": "0.1.7-rc.1",
+    "@deepseek-ai/dsh-typert-protocol": "0.1.7-rc.2",
     "react": "^18.2.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.4",
-    "@deepseek-ai/dsh-typert-registry": "0.1.7-rc.1"
+    "@deepseek-ai/dsh-typert-registry": "0.1.7-rc.2"
   },
   "peerDependencies": {
     "@deepseek-ai/dsh-api-gateway": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0 || >=0.1.7-0 <0.2.0",
