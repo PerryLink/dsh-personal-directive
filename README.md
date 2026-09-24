@@ -45,6 +45,8 @@ dsh-personal-directive/
 ├── index.js                         # Harness 服务端插件入口和运行时开关
 ├── lib/
 │   └── client.js                    # 顶部可视化开关
+├── scripts/
+│   └── check-client-contract.mjs    # 宿主契约检查（符号存在性门禁）
 ├── prompts/
 │   └── personal-directive.md        # 中性占位指令（可替换为自己的内容）
 ├── cordis.patch.yml                 # Bundle 插入声明
@@ -182,16 +184,27 @@ dsh plugin --profile web remove dsh-personal-directive
 
 注意：关闭后 Harness 自己的其他系统提示词仍然存在，本项目只移除自己的提示词段。
 
-## 本地开发和检查
+## Local development and checks
 
 ```powershell
-cd <本仓库目录>
+cd <this repository>
 pnpm install --ignore-workspace
 pnpm run harness:check
 pnpm test
 ```
 
-检查 Web profile 的 bundle 组合：
+Beyond the syntax check, `harness:check` runs the **host contract check** (`scripts/check-client-contract.mjs`). It takes every symbol `lib/client.js` destructures out of the host's `@deepseek-ai/dsh-client-ui-primitives`, and verifies each one against the host's own type surface (`lib/types/**/*.d.ts`) **and** its runtime exports (`lib/index.js`); it also checks that the `variant` values passed to `Button` still belong to the host's `ButtonVariant` union. **A symbol the host dropped is reported by name with a non-zero exit**, so this class of silent non-mounting regression can no longer slip past `node --check` — which only proves the file parses, while `React.createElement(undefined)` does not throw until React renders it.
+
+The check locates a host checkout automatically (a `deepseek-harness` sibling of this repository, an ancestor directory, or a known drive root), or you can point it explicitly:
+
+```powershell
+node scripts/check-client-contract.mjs --host D:/deepseek-harness
+$env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
+```
+
+If it reports that no host checkout could be found, set `DSH_HOST_ROOT` to your DeepSeek Harness checkout.
+
+Checking the Web profile's bundle composition:
 
 ```powershell
 dsh --profile web --dump-config

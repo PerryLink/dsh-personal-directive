@@ -44,6 +44,8 @@ dsh-personal-directive/
 ├── index.js                         # Harness 服务端插件入口和运行时开关
 ├── lib/
 │   └── client.js                    # 顶部可视化开关
+├── scripts/
+│   └── check-client-contract.mjs    # 宿主契约检查（符号存在性门禁）
 ├── prompts/
 │   └── personal-directive.md        # 中性占位指令（可替换为自己的内容）
 ├── cordis.patch.yml                 # Bundle 插入声明
@@ -189,6 +191,17 @@ pnpm install --ignore-workspace
 pnpm run harness:check
 pnpm test
 ```
+
+除语法检查外，`harness:check` 还会运行**宿主契约检查**（`scripts/check-client-contract.mjs`）：它取 `lib/client.js` 从 `@deepseek-ai/dsh-client-ui-primitives` 解构出的每个符号，逐个对照宿主的类型面（`lib/types/**/*.d.ts`）**与**运行时导出（`lib/index.js`）；同时也校验传给 `Button` 的 `variant` 取值仍属于宿主的 `ButtonVariant` 联合类型。**宿主删掉的符号会被点名报错并以非零码退出**，因此这类「静默不挂载」的缺陷不会再从 `node --check` 底下溜过去——语法检查只证明文件能解析，而 `React.createElement(undefined)` 要等 React 真正渲染时才抛错。
+
+检查会自行定位宿主 checkout（本仓库旁的 `deepseek-harness`、某个祖先目录，或常见盘符根），也可显式指定：
+
+```powershell
+node scripts/check-client-contract.mjs --host D:/deepseek-harness
+$env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
+```
+
+若它报告找不到宿主 checkout，把 `DSH_HOST_ROOT` 指向你的 DeepSeek Harness 目录即可。
 
 检查 Web profile 的 bundle 组合：
 

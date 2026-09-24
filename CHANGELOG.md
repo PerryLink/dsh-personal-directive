@@ -2,6 +2,22 @@
 
 All notable changes to `dsh-personal-directive` are documented here.
 
+## [0.2.4] - 2026-09-24
+
+### Fixed
+
+- **The top-bar switch could not mount at all on any 0.1.7 host.** `lib/client.js` destructured `IconCheckOutline16` / `IconCloseOutline16` / `IconLoadingOutline16` and rendered them as `h(IconLoadingOutline16, { size: 14 })` and friends. The host's client visual unification (host commit `4937343a5e`, shipped in `0.1.7-alpha.1`) removed every "size in the name" icon export and re-exported them by stroke weight instead, so all three names resolved to `undefined`, `React.createElement(undefined, …)` threw `Element type is invalid`, and the button never mounted. Renamed to the current exports, one-for-one: `IconCheckOutlineRegular`, `IconCloseOutlineRegular`, `IconLoadingOutlineRegular` (the `Regular` weight, matching the 1px stroke the 16-suffixed glyphs drew). The `size` prop is still accepted under the new API, so `{ size: 14 }` is unchanged.
+- The switch's off state passed `variant: "secondary"`, which is not in the host's `ButtonVariant` union (`'primary' | 'ghost' | 'outline' | 'toolbar'`), so `css[variant]` resolved to `undefined` and the off state silently lost its variant class. It is now `'outline'`: `outline` is the host's one secondary-weight *filled-pair* variant (transparent fill plus a `--dsw-alias-border-l3` hairline border, the pairing the host's own dialog Cancel button uses), which is what a two-state on/off control needs next to the `primary` on state. `ghost` was the other candidate but it is borderless and is merely the component default, so it would render the off state as unstyled next to a filled on state.
+
+### Added
+
+- **A host contract check, `scripts/check-client-contract.mjs`, on the `harness:check` / `check` path.** `node --check` only proves `lib/client.js` parses, which is exactly why the defect above shipped: a symbol the host dropped is syntactically valid and fails only when React renders it, in a browser. The new check reads the require list out of `lib/client.js`, resolves the host's `@deepseek-ai/dsh-client-ui-primitives` from its `exports` map, and verifies every required symbol against the host's own type surface (`lib/types/**/*.d.ts`, following `export *` transitively) **and** its runtime exports (`lib/index.js`), so a name that is declared but never exported at runtime also fails. It additionally pins the `variant` values passed to `Button` against the host's `ButtonVariant` union. Failures name every offending symbol and exit non-zero; the check refuses to report success vacuously (no requires, no resolvable host, or an unreadable declaration all fail loudly). Zero new dependencies; the host checkout is auto-located, overridable with `--host <path>` or `DSH_HOST_ROOT`. The unit tests cover both directions, including that the three pre-0.1.7 icon names are rejected by name.
+
+### Changed
+
+- Runtime dependency `@deepseek-ai/dsh-typert-protocol` raised from `0.1.7-alpha.2` to the published `0.1.7-rc.1`. The four `@deepseek-ai/dsh-*` peer ranges are unchanged: `>=0.1.7-0 <0.2.0` already admits `0.1.7-rc.1`, and widening or narrowing them is a separate concern from this fix.
+- The shipped `files[]` now includes `scripts/`, so the contract check travels with the package.
+
 ## [0.2.3] - 2026-09-12
 
 ### Fixed
