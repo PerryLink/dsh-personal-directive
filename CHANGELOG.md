@@ -2,7 +2,7 @@
 
 All notable changes to `dsh-personal-directive` are documented here.
 
-## [0.2.6] - 2026-09-24
+## [0.2.7] - 2026-09-24
 
 ### Fixed
 

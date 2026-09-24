@@ -38,6 +38,27 @@ function withTempFile(name, content) {
 
 const goodClient = readFileSync(join(repoRoot(), 'lib', 'client.js'), 'utf8')
 
+/**
+ * Whether a real DeepSeek Harness checkout is reachable from here.
+ *
+ * The checkout is a LOCAL DEVELOPMENT ARTIFACT: CI runners and tarball installs have none, and it
+ * is a hardcoded fallback path rather than anything this repository ships. The tests below assert
+ * against the host's OWN symbol surface, so without a checkout they have nothing to assert against.
+ * They skip rather than pass vacuously or fail spuriously — the same rule `scripts/check-client-contract.mjs`
+ * applies when it degrades, and the same rule `dsh-draw`'s `verify:host-contract` states.
+ */
+const NO_HOST = (() => {
+  try {
+    resolveHostRoot()
+    return false
+  } catch {
+    return true
+  }
+})()
+const skipNoHost = NO_HOST
+  ? 'no DeepSeek Harness checkout is present (CI and tarball installs have none)'
+  : false
+
 /** Run `fn` and return the HostSurfaceError it must throw (node's assert.throws returns nothing). */
 function captureContractError(fn) {
   let caught
@@ -54,7 +75,7 @@ function captureContractError(fn) {
   return caught
 }
 
-test('the shipped client entry satisfies the host contract', () => {
+test('the shipped client entry satisfies the host contract', { skip: skipNoHost }, () => {
   const result = checkClientContract()
   assert.equal(result.checked, 4)
   assert.equal(result.packages.length, 1)
@@ -63,7 +84,7 @@ test('the shipped client entry satisfies the host contract', () => {
   assert.ok(result.packages[0].runtime > 100, 'the parsed runtime surface looks too small')
 })
 
-test('a symbol the host removed fails the check, by name', () => {
+test('a symbol the host removed fails the check, by name', { skip: skipNoHost }, () => {
   const stale = goodClient.replace('IconCheckOutlineRegular', 'IconCheckOutline16')
   assert.notEqual(stale, goodClient, 'fixture did not change the entry')
   const root = makeClientFixture(stale)
@@ -73,7 +94,7 @@ test('a symbol the host removed fails the check, by name', () => {
   assert.match(error.message, /neither declared nor exported/)
 })
 
-test('every missing symbol is named, not just the first', () => {
+test('every missing symbol is named, not just the first', { skip: skipNoHost }, () => {
   let stale = goodClient
   for (const symbol of ['IconCheckOutlineRegular', 'IconCloseOutlineRegular', 'IconLoadingOutlineRegular']) {
     stale = stale.replace(symbol, `${symbol.replace(/Regular$/u, '')}16`)
@@ -87,7 +108,7 @@ test('every missing symbol is named, not just the first', () => {
   assert.match(error.message, /3 host-contract mismatches/)
 })
 
-test('a prop value outside the host union fails the check, naming the union', () => {
+test('a prop value outside the host union fails the check, naming the union', { skip: skipNoHost }, () => {
   const stale = goodClient.replace('"primary" : "outline"', '"primary" : "secondary"')
   assert.notEqual(stale, goodClient, 'fixture did not change the entry')
   const root = makeClientFixture(stale)
@@ -204,7 +225,7 @@ test('parseStringUnion reads a type alias and an optional member', () => {
   assert.equal(parseStringUnion(member, 'NoSuchAlias', 'absent'), null)
 })
 
-test('the host prop unions the client depends on are readable', () => {
+test('the host prop unions the client depends on are readable', { skip: skipNoHost }, () => {
   const unions = loadHostPropUnions()
   const variants = unions.get('Button.variant')
   assert.ok(Array.isArray(variants), 'Button.variant union not found on the host')
@@ -212,7 +233,7 @@ test('the host prop unions the client depends on are readable', () => {
   assert.equal(variants.includes('secondary'), false)
 })
 
-test('the host surface parser stays honest: every declared value is exported at runtime', () => {
+test('the host surface parser stays honest: every declared value is exported at runtime', { skip: skipNoHost }, () => {
   const surface = loadHostPackageSurface(resolveHostRoot().root, UI_PRIMITIVES)
   const declaredOnly = [...surface.declared].filter((name) => !surface.runtime.has(name))
   // Tolerated only if the parser itself is misreading: zero here means the two
