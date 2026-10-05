@@ -1,5 +1,7 @@
 # dsh-personal-directive
 
+> Release stamp: `0.2.9` (2026-10-04).
+
 > ⚠️ 此项目已从 DSH 生态撤除，不再参与任何目录收录（2026-09-13）。
 > ⚠️ This project has been withdrawn from the DSH ecosystem and no longer participates in any catalog listing (2026-09-13).
 

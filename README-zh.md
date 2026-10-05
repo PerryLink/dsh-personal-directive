@@ -1,5 +1,7 @@
 # dsh-personal-directive
 
+> Release stamp: `0.2.9` (2026-10-04).
+
 > ⚠️ 此项目已从 DSH 生态撤除，不再参与任何目录收录（2026-09-13）。
 
 - **1024 商店渠道**：先 `npm i -g dsh1024`，再 `dsh1024 plugin --profile web add dsh-personal-directive`（计入 [deepseek1024.com](https://deepseek1024.com) 安装排行）。
