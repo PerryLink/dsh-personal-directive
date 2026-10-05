@@ -10,6 +10,12 @@ DeepSeek Harness 的「无限一代」二次开发**框架版**：保留原版�
 
 > 本项目是基于原项目的个人二次开发版本，不是原作者的官方发布版本。
 
+## 兼容性
+
+| 方面 | 状态 |
+|---|---|
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1`（钉在 `0.2.1-alpha.1` 线：devDependencies 中的 `@deepseek-ai/dsh-typert-registry` 与 dependencies 中的 `@deepseek-ai/dsh-typert-protocol` 均在该线；由 `pnpm run harness:check` 与 `pnpm test` 门禁把关；peer 区间亦接纳 `>=0.2.1-0 <0.3.0`） |
+
 ## 项目来源
 
 原版项目：

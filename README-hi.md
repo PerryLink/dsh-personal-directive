@@ -10,6 +10,12 @@ DeepSeek Harness के लिए «Infinite Generation One» के फोर�
 
 > यह प्रोजेक्ट मूल प्रोजेक्ट पर आधारित एक व्यक्तिगत संस्करण है, मूल लेखक की आधिकारिक रिलीज़ नहीं।
 
+## अनुकूलता
+
+| पहलू | स्थिति |
+|---|---|
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (`0.2.1-alpha.1` लाइन पर पिन: devDependencies में `@deepseek-ai/dsh-typert-registry` और dependencies में `@deepseek-ai/dsh-typert-protocol`; `pnpm run harness:check` और `pnpm test` गेट द्वारा नियंत्रित; peer रेंज `>=0.2.1-0 <0.3.0` भी स्वीकार करती है) |
+
 ## प्रोजेक्ट का स्रोत
 
 मूल प्रोजेक्ट:

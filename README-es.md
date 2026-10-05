@@ -10,6 +10,12 @@ Edición **de framework** del fork de «Infinite Generation One» para DeepSeek 
 
 > Este proyecto es una edición personal derivada del proyecto original, no una publicación oficial del autor original.
 
+## Compatibilidad
+
+| Superficie | Estado |
+|---|---|
+| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (fijado en la línea `0.2.1-alpha.1`: `@deepseek-ai/dsh-typert-registry` en devDependencies y `@deepseek-ai/dsh-typert-protocol` en dependencies; con las puertas `pnpm run harness:check` y `pnpm test`; los rangos peer también admiten `>=0.2.1-0 <0.3.0`) |
+
 ## Origen del proyecto
 
 Proyecto original:
