@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.10] - 2026-10-18
+
+### Fixed
+
+- Add `engines.dsh` and move React / typert-protocol from runtime dependencies to peer+dev so the host supplies the single client copy. This is a template package; the same rule now applies to every fork.
+
 All notable changes to `dsh-personal-directive` are documented here.
 
 ## [Unreleased]
