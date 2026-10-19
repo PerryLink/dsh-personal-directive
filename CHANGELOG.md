@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.11] - 2026-10-19
+
+### Changed
+
+- License normalized to Apache-2.0 (LICENSE + package metadata).
+
 ## [0.2.10] - 2026-10-18
 
 ### Fixed
