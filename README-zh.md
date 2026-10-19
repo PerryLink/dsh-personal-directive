@@ -265,7 +265,7 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 感谢原项目作者 Minglink 提供 `dsh-infinite-gen-1` 的原始实现和提示词方案，感谢 liucaimao2026 的框架实现。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
 
-## PerryLink DSH 插件家族
+## PerryLink DSH Plugin Family
 
 本项目是 [PerryLink](https://github.com/PerryLink) 维护的 DeepSeek Harness 插件家族成员。完整名单默认折叠，避免每个 README 的首屏被长表淹没；点击展开可查看每一行及其状态。
 

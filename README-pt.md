@@ -265,7 +265,7 @@ A declaração MIT deste repositório não deve ser interpretada como autorizaç
 
 Agradecemos ao autor do projeto original, Minglink, pela implementação original e pela proposta de prompt do `dsh-infinite-gen-1`. Este repositório apenas acrescenta, sobre essa base, a gestão do diretório pessoal, a chave de execução no topo do Harness Web e o código de integração relacionado.
 
-## Família de plugins DSH da PerryLink
+## PerryLink DSH Plugin Family
 
 Este projeto faz parte da família de plugins do DeepSeek Harness da [PerryLink](https://github.com/PerryLink). O registro fica recolhido abaixo para que cada README mantenha uma primeira tela curta; expanda para ver cada linha e seu status.
 

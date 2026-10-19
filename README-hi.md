@@ -265,7 +265,7 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 मूल प्रोजेक्ट के लेखक Minglink को `dsh-infinite-gen-1` का मूल कार्यान्वयन और प्रॉम्प्ट दृष्टिकोण देने के लिए धन्यवाद। यह रिपॉज़िटरी उसी आधार पर केवल व्यक्तिगत निर्देशिका प्रबंधन, Harness Web के ऊपर रनटाइम स्विच और संबंधित इंटीग्रेशन कोड जोड़ती है।
 
-## PerryLink DSH प्लगइन परिवार
+## PerryLink DSH Plugin Family
 
 यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) के DeepSeek Harness प्लगइन परिवार का हिस्सा है। पूरी सूची नीचे संक्षिप्त रखी गई है ताकि हर README की पहली स्क्रीन छोटी रहे; हर पंक्ति और उसकी स्थिति देखने के लिए इसे खोलें।
 
