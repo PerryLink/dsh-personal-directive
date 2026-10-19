@@ -10,7 +10,7 @@
     "type": "individual",
     "url": "https://github.com/sponsors/PerryLink"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "index.js",
   "keywords": [
