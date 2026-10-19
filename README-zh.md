@@ -10,6 +10,10 @@ DeepSeek Harness 的「无限一代」二次开发**框架版**：保留原版�
 
 > 本项目是基于原项目的个人二次开发版本，不是原作者的官方发布版本。
 
+![dsh-personal-directive 工作流图：安装 → 打开面板 → 操作。](docs/assets/dsh-personal-directive-flow.svg)
+
+*工作流概览：安装 → 打开面板 → 操作。下面的示例使用实际命令面。*
+
 ## 安装
 
 ### 从 GitHub 安装

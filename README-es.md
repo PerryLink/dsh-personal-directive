@@ -10,6 +10,10 @@ Edición **de framework** del fork de «Infinite Generation One» para DeepSeek 
 
 > Este proyecto es una edición personal derivada del proyecto original, no una publicación oficial del autor original.
 
+![Diagrama de flujo de dsh-personal-directive: instalar → abrir panel → actuar.](docs/assets/dsh-personal-directive-flow.svg)
+
+*Resumen del flujo: instalar → abrir panel → actuar. Los ejemplos siguientes usan la superficie de comandos real.*
+
 ## Instalación
 
 ### Desde GitHub
