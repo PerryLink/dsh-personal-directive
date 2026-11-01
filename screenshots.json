@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-personal-directive-hero.png",
+    "kind": "hero",
+    "alt": "dsh-personal-directive documentation card",
+    "caption": "Generated documentation baseline; replace with a real run."
+  },
+  {
+    "path": "docs/assets/dsh-personal-directive-demo.gif",
+    "kind": "demo",
+    "alt": "dsh-personal-directive install preview",
+    "caption": "Generated install preview; not a test result."
+  }
+]

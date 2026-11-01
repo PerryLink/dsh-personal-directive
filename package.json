@@ -46,7 +46,12 @@
     "scripts",
     "cordis.patch.yml",
     "prompts",
-    "README.md"
+    "README.md",
+    "PRIVACY.md",
+    "icon.svg",
+    "screenshots.json",
+    "docs/assets/dsh-personal-directive-demo.gif",
+    "docs/assets/dsh-personal-directive-hero.png"
   ],
   "scripts": {
     "harness:check": "node --check index.js && node --check lib/client.js && node scripts/check-client-contract.mjs && node scripts/check-typert-codec.mjs",
@@ -90,5 +95,6 @@
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
     "dsh": ">=0.2.1-0 <0.3.0"
-  }
+  },
+  "icon": "icon.svg"
 }
