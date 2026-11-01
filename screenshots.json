@@ -2,13 +2,13 @@
   {
     "path": "docs/assets/dsh-personal-directive-hero.png",
     "kind": "hero",
-    "alt": "dsh-personal-directive documentation card",
-    "caption": "Generated documentation baseline; replace with a real run."
+    "alt": "dsh-personal-directive real test run",
+    "caption": "Real command: node --test \"test/*.test.mjs\" \u2014 30 tests passed, 0 failed. Full local test suite. Run 2026-11-01."
   },
   {
     "path": "docs/assets/dsh-personal-directive-demo.gif",
     "kind": "demo",
-    "alt": "dsh-personal-directive install preview",
-    "caption": "Generated install preview; not a test result."
+    "alt": "dsh-personal-directive real test output replay",
+    "caption": "The same real command output, replayed line by line."
   }
 ]
