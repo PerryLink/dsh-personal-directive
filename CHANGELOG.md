@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- **Host 0.2.2 line support.** The two `@deepseek-ai/dsh-*` dev dependencies move from `0.2.1-rc.2` to `0.2.2-rc.1` (`@deepseek-ai/dsh-typert-protocol`, `@deepseek-ai/dsh-typert-registry`), and `@deepseek-ai/cordis` moves from `^4.0.5-alpha.1` to `^4.1.0`, the version the 0.2.2 host vendors. `engines.dsh` appends `>=0.2.2-0 <0.3.0` (append-only) and `engines.node` becomes `^22.19.0 || >=24.9.0`; the peer timelines (the four optional host peers and `dsh-typert-protocol`) append the same `>=0.2.2-0 <0.3.0` clause. Nothing was narrowed — every earlier clause stays in place and in order.
+
+### Fixed
+
+- **No Typert artifact regeneration is needed at 0.2.2.** Both codec faces (`index.js`'s `TYPERT`, `lib/client.js`'s `CONTRIBUTION`) already declare the single `create()` factory and carry no `schema` member; the 0.1.5-line pad was removed in 0.2.5. Re-measured against the installed `@deepseek-ai/dsh-typert-registry@0.2.2-rc.1`, `probe:typert-codec` accepts the `create()` face on both the host and the client contribution and still refuses `{ mode, typeSymbol, schema }` — 4/4 as the local gate assumes. The manifest also satisfies the 0.2.2 loader's `validateTypertManifest` rules (empty `schemas`/`model`, direct invocations, strict `create()` codecs), so no generated artifact was introduced.
+
 ## [0.2.11] - 2026-10-19
 
 ### Changed
@@ -13,8 +23,6 @@
 - Add `engines.dsh` and move React / typert-protocol from runtime dependencies to peer+dev so the host supplies the single client copy. This is a template package; the same rule now applies to every fork.
 
 All notable changes to `dsh-personal-directive` are documented here.
-
-## [Unreleased]
 
 ## [0.2.9] - 2026-10-04
 
