@@ -96,7 +96,7 @@ dsh plugin --profile web remove dsh-personal-directive
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (`0.2.1-alpha.1` pin: `@deepseek-ai/dsh-typert-registry` in devDependencies and `@deepseek-ai/dsh-typert-protocol` in dependencies, both on that line; gated by `pnpm run harness:check` and `pnpm test`; the peer ranges also admit `>=0.2.1-0 <0.3.0`) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.1-alpha.1` pin: `@deepseek-ai/dsh-typert-registry` in devDependencies and `@deepseek-ai/dsh-typert-protocol` in dependencies, both on that line; gated by `pnpm run harness:check` and `pnpm test`; the peer ranges also admit `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
 
 ## 项目来源
 

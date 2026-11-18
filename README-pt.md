@@ -95,7 +95,7 @@ A chave «Diretiva: ativada / Diretiva: desativada» no topo é uma chave de exe
 
 | Aspeto | Estado |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (fixado na linha `0.2.1-alpha.1`: `@deepseek-ai/dsh-typert-registry` em devDependencies e `@deepseek-ai/dsh-typert-protocol` em dependencies; com os portões `pnpm run harness:check` e `pnpm test`; os intervalos peer também admitem `>=0.2.1-0 <0.3.0`) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (fixado na linha `0.2.1-alpha.1`: `@deepseek-ai/dsh-typert-registry` em devDependencies e `@deepseek-ai/dsh-typert-protocol` em dependencies; com os portões `pnpm run harness:check` e `pnpm test`; os intervalos peer também admitem `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
 
 ## Origem do projeto
 

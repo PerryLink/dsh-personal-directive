@@ -95,7 +95,7 @@ dsh plugin --profile web remove dsh-personal-directive
 
 | पहलू | स्थिति |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (`0.2.1-alpha.1` लाइन पर पिन: devDependencies में `@deepseek-ai/dsh-typert-registry` और dependencies में `@deepseek-ai/dsh-typert-protocol`; `pnpm run harness:check` और `pnpm test` गेट द्वारा नियंत्रित; peer रेंज `>=0.2.1-0 <0.3.0` भी स्वीकार करती है) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.1-alpha.1` लाइन पर पिन: devDependencies में `@deepseek-ai/dsh-typert-registry` और dependencies में `@deepseek-ai/dsh-typert-protocol`; `pnpm run harness:check` और `pnpm test` गेट द्वारा नियंत्रित; peer रेंज `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0` भी स्वीकार करती है) |
 
 ## प्रोजेक्ट का स्रोत
 
