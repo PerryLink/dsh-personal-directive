@@ -95,7 +95,7 @@ dsh plugin --profile web remove dsh-personal-directive
 
 | 方面 | 状态 |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4`（钉在 `0.2.1-alpha.1` 线：devDependencies 中的 `@deepseek-ai/dsh-typert-registry` 与 dependencies 中的 `@deepseek-ai/dsh-typert-protocol` 均在该线；由 `pnpm run harness:check` 与 `pnpm test` 门禁把关；peer 区间亦接纳 `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`） |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4`（钉在 `0.2.2-rc.4` 线：devDependencies 中的 `@deepseek-ai/dsh-typert-registry` 与 dependencies 中的 `@deepseek-ai/dsh-typert-protocol` 均在该线；由 `pnpm run harness:check` 与 `pnpm test` 门禁把关；peer 区间亦接纳 `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`） |
 
 ## 项目来源
 
@@ -148,7 +148,7 @@ dsh-personal-directive/
 
 ## 环境要求
 
-- 已安装 DeepSeek Harness，且 `dsh web` 可以正常启动。
+- 已安装 DeepSeek Harness，且 `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh web` 可以正常启动。
 - `dsh plugin` 命令可用。
 - `pnpm` 已加入 PATH。
 - 当前安装教程面向 `web` profile。
@@ -216,7 +216,7 @@ node scripts/check-client-contract.mjs --host D:/deepseek-harness
 $env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
 ```
 
-若它报告找不到宿主 checkout，把 `DSH_HOST_ROOT` 指向你的 DeepSeek Harness 目录即可。
+若它报告找不到宿主 checkout，把 `dsh-v0.2.2-rc.4`（2026-11-18）；`DSH_HOST_ROOT` 指向你的 DeepSeek Harness 目录即可。
 
 `harness:check` 还会运行 **Typert codec 门禁**（`scripts/check-typert-codec.mjs`）。Typert 调用 codec 的形态是 `{ mode: 'strict', typeSymbol, create }`；0.1.5 线写的是 `{ mode, typeSymbol, schema }`，而 0.1.7 宿主在挂载时直接拒收旧形态——`validateCodec` 抛 `typert: <id> result strict codec has no create() factory`，插件行不激活，而本仓其他任何检查都看不见它：旧字面量是完全合法的对象，`node --check` 过、stub Context 也照收。这个门禁就是那条宿主规则的本地镜像：它构造两面各自的真实产物——`index.js` 导出的 `TYPERT` manifest，以及 `lib/client.js` 交给 `ctx.remote.$mount` 的 contribution——遍历每个 descriptor，断言每个 codec 都带 `create()` **函数**且不含 `schema` 成员，并点名出错的 invocation id。`test/typert-mount.test.mjs` 更进一步：把两面注册进真实 `@deepseek-ai/dsh-typert-registry` + 真实 Cordis `Context`，再在内存里重建被拒的 0.1.5 线 codec，断言该注册器确实拒收——以此证明门禁**能红**。
 
@@ -267,7 +267,7 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 ## 致谢
 
-感谢原项目作者 Minglink 提供 `dsh-infinite-gen-1` 的原始实现和提示词方案，感谢 liucaimao2026 的框架实现。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
+感谢原项目作者 Minglink 提供 `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh-infinite-gen-1` 的原始实现和提示词方案，感谢 liucaimao2026 的框架实现。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
 
 ## PerryLink DSH Plugin Family
 

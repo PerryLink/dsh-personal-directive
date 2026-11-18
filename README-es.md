@@ -24,7 +24,7 @@ Se recomienda instalar directamente desde GitHub:
 dsh plugin --profile web add github:PerryLink/dsh-personal-directive
 ```
 
-Si `dsh` no está en el PATH, usa el comando del directorio de instalación de DSH:
+Si `dsh-v0.2.2-rc.4`（2026-11-18）`dsh` no está en el PATH, usa el comando del directorio de instalación de DSH:
 
 ```powershell
 & "D:/deepseek-harness/node_modules/.bin/dsh.cmd" plugin --profile web add github:PerryLink/dsh-personal-directive
@@ -95,7 +95,7 @@ El interruptor «Directiva: activada / Directiva: desactivada» de la parte supe
 
 | Superficie | Estado |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (fijado en la línea `0.2.1-alpha.1`: `@deepseek-ai/dsh-typert-registry` en devDependencies y `@deepseek-ai/dsh-typert-protocol` en dependencies; con las puertas `pnpm run harness:check` y `pnpm test`; los rangos peer también admiten `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (fijado en la línea `0.2.2-rc.4`: `@deepseek-ai/dsh-typert-registry` en devDependencies y `@deepseek-ai/dsh-typert-protocol` en dependencies; con las puertas `pnpm run harness:check` y `pnpm test`; los rangos peer también admiten `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
 
 ## Origen del proyecto
 
@@ -148,7 +148,7 @@ dsh-personal-directive/
 
 ## Requisitos del entorno
 
-- DeepSeek Harness instalado y `dsh web` arrancando correctamente.
+- DeepSeek Harness instalado y `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh web` arrancando correctamente.
 - El comando `dsh plugin` disponible.
 - `pnpm` en el PATH.
 - Este tutorial de instalación está pensado para el perfil `web`.
@@ -216,7 +216,7 @@ node scripts/check-client-contract.mjs --host D:/deepseek-harness
 $env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
 ```
 
-Si informa de que no encuentra ningún checkout del host, define `DSH_HOST_ROOT` con la ruta de tu checkout de DeepSeek Harness.
+Si informa de que no encuentra ningún checkout del host, define `dsh-v0.2.2-rc.4`（2026-11-18）；`DSH_HOST_ROOT` con la ruta de tu checkout de DeepSeek Harness.
 
 `harness:check` también ejecuta la **comprobación del codec Typert** (`scripts/check-typert-codec.mjs`). Un codec de invocación Typert es `{ mode: 'strict', typeSymbol, create }`; en la línea 0.1.5 era `{ mode, typeSymbol, schema }`, y el host 0.1.7 rechaza la forma antigua al montar — `validateCodec` lanza `typert: <id> result strict codec has no create() factory`, la fila del plugin no se activa y nada más en este repositorio puede verlo: el literal antiguo es un objeto perfectamente válido, así que `node --check` pasa y un Context de prueba lo acepta. Esta comprobación es el espejo local de esa regla del host. Construye los artefactos reales de ambas caras — el manifiesto `TYPERT` exportado por `index.js` y la contribución que `lib/client.js` entrega a `ctx.remote.$mount` —, recorre cada descriptor y exige que cada codec lleve una **función** `create()` y ningún miembro `schema`, nombrando el id de invocación infractor. `test/typert-mount.test.mjs` va más allá: registra ambas caras con un `@deepseek-ai/dsh-typert-registry` real sobre un `Context` real de Cordis, y luego reconstruye en memoria el codec rechazado de la línea 0.1.5 y comprueba que el registro lo rechaza — de modo que queda probado que la puerta puede fallar.
 
@@ -267,7 +267,7 @@ La declaración MIT de este repositorio no debe interpretarse como una autorizac
 
 ## Agradecimientos
 
-Gracias al autor del proyecto original, Minglink, por aportar la implementación original y el planteamiento de prompt de `dsh-infinite-gen-1`. Este repositorio solo añade sobre esa base la gestión del directorio personal, el conmutador en tiempo de ejecución de la barra superior de Harness Web y el código de integración relacionado.
+Gracias al autor del proyecto original, Minglink, por aportar la implementación original y el planteamiento de prompt de `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh-infinite-gen-1`. Este repositorio solo añade sobre esa base la gestión del directorio personal, el conmutador en tiempo de ejecución de la barra superior de Harness Web y el código de integración relacionado.
 
 ## PerryLink DSH Plugin Family
 

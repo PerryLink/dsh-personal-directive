@@ -95,7 +95,7 @@ dsh plugin --profile web remove dsh-personal-directive
 
 | पहलू | स्थिति |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.1-alpha.1` लाइन पर पिन: devDependencies में `@deepseek-ai/dsh-typert-registry` और dependencies में `@deepseek-ai/dsh-typert-protocol`; `pnpm run harness:check` और `pnpm test` गेट द्वारा नियंत्रित; peer रेंज `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0` भी स्वीकार करती है) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.2-rc.4` लाइन पर पिन: devDependencies में `@deepseek-ai/dsh-typert-registry` और dependencies में `@deepseek-ai/dsh-typert-protocol`; `pnpm run harness:check` और `pnpm test` गेट द्वारा नियंत्रित; peer रेंज `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0` भी स्वीकार करती है) |
 
 ## प्रोजेक्ट का स्रोत
 
@@ -148,7 +148,7 @@ dsh-personal-directive/
 
 ## पर्यावरण आवश्यकताएँ
 
-- DeepSeek Harness इंस्टॉल हो और `dsh web` ठीक से शुरू होता हो।
+- DeepSeek Harness इंस्टॉल हो और `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh web` ठीक से शुरू होता हो।
 - `dsh plugin` कमांड उपलब्ध हो।
 - `pnpm` PATH में हो।
 - यह इंस्टॉल ट्यूटोरियल `web` प्रोफ़ाइल के लिए है।
@@ -216,7 +216,7 @@ node scripts/check-client-contract.mjs --host D:/deepseek-harness
 $env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
 ```
 
-अगर यह बताए कि कोई होस्ट चेकआउट नहीं मिला, तो `DSH_HOST_ROOT` में अपने DeepSeek Harness चेकआउट का पथ दें।
+अगर यह बताए कि कोई होस्ट चेकआउट नहीं मिला, तो `dsh-v0.2.2-rc.4`（2026-11-18）；`DSH_HOST_ROOT` में अपने DeepSeek Harness चेकआउट का पथ दें।
 
 `harness:check` **Typert कोडेक जाँच** (`scripts/check-typert-codec.mjs`) भी चलाता है। Typert इनवोकेशन कोडेक `{ mode: 'strict', typeSymbol, create }` होता है; 0.1.5 लाइन में यह `{ mode, typeSymbol, schema }` था, और 0.1.7 होस्ट माउंट के समय पुराना रूप अस्वीकार कर देता है — `validateCodec` `typert: <id> result strict codec has no create() factory` फेंकता है, प्लगइन पंक्ति सक्रिय नहीं होती, और इस रिपॉज़िटरी में और कुछ भी यह नहीं देख सकता: पुराना लिटरल पूरी तरह वैध ऑब्जेक्ट है, इसलिए `node --check` पास हो जाता है और परीक्षण Context उसे स्वीकार कर लेता है। यह जाँच उसी होस्ट नियम का स्थानीय दर्पण है। यह दोनों फलकों की असली कलाकृतियाँ बनाती है — `index.js` द्वारा निर्यात `TYPERT` मैनिफ़ेस्ट और `lib/client.js` द्वारा `ctx.remote.$mount` को दिया गया योगदान — हर डिस्क्रिप्टर पर चलती है और माँगती है कि हर कोडेक में **फ़ंक्शन** `create()` हो और कोई `schema` सदस्य न हो, और उल्लंघन करने वाले इनवोकेशन id का नाम देती है। `test/typert-mount.test.mjs` इससे आगे जाता है: दोनों फलकों को असली Cordis `Context` पर असली `@deepseek-ai/dsh-typert-registry` के साथ रजिस्टर करता है, फिर 0.1.5 लाइन के अस्वीकृत कोडेक को स्मृति में दोबारा बनाकर जाँचता है कि रजिस्ट्री उसे अस्वीकार करती है — इससे सिद्ध होता है कि गेट विफल हो सकता है।
 
@@ -267,7 +267,7 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 ## आभार
 
-मूल प्रोजेक्ट के लेखक Minglink को `dsh-infinite-gen-1` का मूल कार्यान्वयन और प्रॉम्प्ट दृष्टिकोण देने के लिए धन्यवाद। यह रिपॉज़िटरी उसी आधार पर केवल व्यक्तिगत निर्देशिका प्रबंधन, Harness Web के ऊपर रनटाइम स्विच और संबंधित इंटीग्रेशन कोड जोड़ती है।
+मूल प्रोजेक्ट के लेखक Minglink को `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh-infinite-gen-1` का मूल कार्यान्वयन और प्रॉम्प्ट दृष्टिकोण देने के लिए धन्यवाद। यह रिपॉज़िटरी उसी आधार पर केवल व्यक्तिगत निर्देशिका प्रबंधन, Harness Web के ऊपर रनटाइम स्विच और संबंधित इंटीग्रेशन कोड जोड़ती है।
 
 ## PerryLink DSH Plugin Family
 

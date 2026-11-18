@@ -96,7 +96,7 @@ dsh plugin --profile web remove dsh-personal-directive
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.1-alpha.1` pin: `@deepseek-ai/dsh-typert-registry` in devDependencies and `@deepseek-ai/dsh-typert-protocol` in dependencies, both on that line; gated by `pnpm run harness:check` and `pnpm test`; the peer ranges also admit `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (`0.2.2-rc.4` pin: `@deepseek-ai/dsh-typert-registry` in devDependencies and `@deepseek-ai/dsh-typert-protocol` in dependencies, both on that line; gated by `pnpm run harness:check` and `pnpm test`; the peer ranges also admit `>=0.2.1-0 <0.3.0 || >=0.2.2-0 <0.3.0`) |
 
 ## 项目来源
 
@@ -149,7 +149,7 @@ dsh-personal-directive/
 
 ## 环境要求
 
-- 已安装 DeepSeek Harness，且 `dsh web` 可以正常启动。
+- 已安装 DeepSeek Harness，且 `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh web` 可以正常启动。
 - `dsh plugin` 命令可用。
 - `pnpm` 已加入 PATH。
 - 当前安装教程面向 `web` profile。
@@ -217,7 +217,7 @@ node scripts/check-client-contract.mjs --host D:/deepseek-harness
 $env:DSH_HOST_ROOT = "D:/deepseek-harness"; pnpm run check:client-contract
 ```
 
-If it reports that no host checkout could be found, set `DSH_HOST_ROOT` to your DeepSeek Harness checkout.
+If it reports that no host checkout could be found, set `dsh-v0.2.2-rc.4`（2026-11-18）；`DSH_HOST_ROOT` to your DeepSeek Harness checkout.
 
 `harness:check` also runs the **Typert codec check** (`scripts/check-typert-codec.mjs`). A Typert invocation codec is `{ mode: 'strict', typeSymbol, create }`; on the 0.1.5 line it was `{ mode, typeSymbol, schema }` instead, and the 0.1.7 host refuses the old form at mount — `validateCodec` throws `typert: <id> result strict codec has no create() factory`, the plugin row does not activate, and nothing else in this repository can see it: the old literal is a perfectly valid object, so `node --check` passes and a stub Context accepts it. The check is the local mirror of that host rule. It builds both faces' real artifacts — `index.js`'s exported `TYPERT` manifest and the contribution `lib/client.js` hands to `ctx.remote.$mount` — walks every descriptor, and asserts each codec carries a `create()` **function** and no `schema` member, naming the offending invocation id. `test/typert-mount.test.mjs` goes further and registers both faces with a real `@deepseek-ai/dsh-typert-registry` on a real Cordis `Context`, then rebuilds the rejected 0.1.5-line codec in memory and asserts the registry refuses it — so the gate is proven able to fail.
 
@@ -268,7 +268,7 @@ https://github.com/Minglink/dsh-infinite-gen-1
 
 ## 致谢
 
-感谢原项目作者 Minglink 提供 `dsh-infinite-gen-1` 的原始实现和提示词方案。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
+感谢原项目作者 Minglink 提供 `dsh-v0.2.2-rc.4`（2026-11-18）；`dsh-infinite-gen-1` 的原始实现和提示词方案。本仓库仅在其基础上增加个人目录管理、Harness Web 顶部运行时开关和相关集成代码。
 
 ## PerryLink DSH Plugin Family
 
