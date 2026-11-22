@@ -10,6 +10,8 @@ Edición **de framework** del fork de «Infinite Generation One» para DeepSeek 
 
 > Este proyecto es una edición personal derivada del proyecto original, no una publicación oficial del autor original.
 
+Última verificación: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 ![Diagrama de flujo de dsh-personal-directive: instalar → abrir panel → actuar.](docs/assets/dsh-personal-directive-flow.svg)
 
 *Resumen del flujo: instalar → abrir panel → actuar. Los ejemplos siguientes usan la superficie de comandos real.*
@@ -24,7 +26,7 @@ Se recomienda instalar directamente desde GitHub:
 dsh plugin --profile web add github:PerryLink/dsh-personal-directive
 ```
 
-Si `dsh-v0.2.2-rc.4`（2026-11-18）`dsh` no está en el PATH, usa el comando del directorio de instalación de DSH:
+Si, `dsh` no está en el PATH, usa el comando del directorio de instalación de DSH:
 
 ```powershell
 & "D:/deepseek-harness/node_modules/.bin/dsh.cmd" plugin --profile web add github:PerryLink/dsh-personal-directive

@@ -11,6 +11,8 @@ DeepSeek Harness 的「无限一代」二次开发**框架版**：保留原版�
 
 > 本项目是基于原项目的个人二次开发版本，不是原作者的官方发布版本。
 
+最近一次核验：DeepSeek Harness `dsh-v0.2.3-alpha.1`（2026-11-22）。
+
 ![Workflow diagram for dsh-personal-directive: install → open panel → act.](docs/assets/dsh-personal-directive-flow.svg)
 
 *Workflow overview: install → open panel → act. The examples below use the real command surface.*
